@@ -35,5 +35,6 @@ for n in range(10):
     images = glob.glob('./numbers/10x15/Beige/%s/*.png'%n)
     for image in images:
         with open(image, 'rb') as file:
-            wrapped = wrapper(identify_beige, file)
-            print(timeit.timeit(wrapped, number=480))
+            print(identify_beige(image))
+            # wrapped = wrapper(identify_beige, file)
+            # print(timeit.timeit(wrapped, number=480))
