@@ -32,7 +32,7 @@ def wrapper(func, *args, **kwargs):
     return wrapped
 
 for n in range(10):
-    images = glob.glob('C:/Users/bruno/Documents/Options Research/numbers/10x15/Beige/%s/*.png'%n)
+    images = glob.glob('./numbers/10x15/Beige/%s/*.png'%n)
     for image in images:
         with open(image, 'rb') as file:
             wrapped = wrapper(identify_beige, file)
