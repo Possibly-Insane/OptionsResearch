@@ -4,19 +4,17 @@ import imagehash
 
 
 def identify(image, srcSet: tuple):
+    
     (scores, threshold, guess) = srcSet
-
     # variable setup for later
-    count = np.zeros(10)
-
     # image is hashed and hash is translated from hex to binary
     hash_value = str(imagehash.dhash_vertical(Image.open(image), hash_size=4))
     binary = bin(int(hash_value, 16))[2:].zfill(16)
     array = np.array(list(binary), dtype=int)
 
     # scoring of hash
-    count = 0
-    for n1 in range(0, 15):
+    count = np.zeros(10)
+    for n1 in range(16):
         if array[n1] == 0:
             count -= scores[n1]
         else:

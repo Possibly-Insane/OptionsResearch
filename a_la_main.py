@@ -1,6 +1,7 @@
 from MrData import *
 from CharacterIdentifierNew import *
 from pathlib import Path
+from IdentifierManager import *
 
 
 def get_paths(size, colour, number: int):
@@ -9,19 +10,42 @@ def get_paths(size, colour, number: int):
     return files
 
 
+def get_all_paths(data_set: MrData):
+    sizes = ["10x15", "10x17", "15x20"]
+    colours = {"Beige": Colour.Beige,
+               "Grey": Colour.Grey,
+               "White": Colour.White}
+    ret = []
+    for size in sizes:
+        for colour in colours.keys():
+            print(colour, colours[colour])
+            for i in range(10):
+                for path in get_paths(size, colour, i):
+                    (num, guessed) = get_identified(path, data_set, colours[colour])
+                    ret.append({"real num": i, "computed num": num, "is guessed": guessed})
+    return ret
+
+
 def main():
     data_set = MrData()  # needs to bo ony one mr Data
-    srcSet = data_set.get_set(Colour.Beige)
-    srcSetGuess = data_set.get_set(Colour.Beige, guess=True)
-    # print(srcSet[0])  # for debug
-    # print(srcSet[1])
-    image = "numbers/10x15/Beige/0/196.png"
-    print(identify(image, srcSet))
-    print(identify(image, srcSetGuess))
-    print()
-    paths = get_paths("10x15", "Beige", 0)
-    for path in paths:
-        print(path)
+    total_results = get_all_paths(data_set)
+    print(total_results)
+
+    # srcSet = data_set.get_set(Colour.White)
+    # srcSetGuess = data_set.get_set(Colour.White, guess=True)
+    #
+    # print(identify(image, srcSet))
+    # print(identify(image, srcSetGuess))
+    # print()
+    # srcSet1 = data_set.get_set(Colour.Beige)
+    # srcSetGuess1 = data_set.get_set(Colour.Beige, guess=True)
+    # image2 = "numbers/10x15/Beige/0/16.png"
+    # print(identify(image2, srcSet1))
+    # print(identify(image2, srcSetGuess1))
+    # print()
+    # paths = get_paths("10x15", "Beige", 0)
+    # for path in paths:
+    #     print(path)
 
 
 

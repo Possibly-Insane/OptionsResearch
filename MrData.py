@@ -63,7 +63,7 @@ class MrData:
             else:
                 return (
                     self.white_sure,
-                    self.white_sure_threshold,
+                    self.white_sure_threshold[0],
                     False
                 )
         else:
