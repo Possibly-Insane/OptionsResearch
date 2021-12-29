@@ -24,7 +24,7 @@ def identify(image, srcSet: tuple):
     # checking of scores
     if not guess:
         for n2 in range(10):
-            print(count[n2], threshold[n2])
+            # print(count[n2], threshold[n2])
             if count[n2] == threshold[n2]:
                 output = n2
     else:
